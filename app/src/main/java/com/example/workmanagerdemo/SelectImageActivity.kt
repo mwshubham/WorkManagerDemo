@@ -149,8 +149,8 @@ class SelectImageActivity : AppCompatActivity() {
             return
         }
 
-//        val filterIntent = Intent(this, BlurActivity::class.java)
-//        filterIntent.putExtra(KEY_IMAGE_URI, imageUri.toString())
-//        startActivity(filterIntent)
+        val filterIntent = Intent(this, BlurActivity::class.java)
+        filterIntent.putExtra(KEY_IMAGE_URI, imageUri.toString())
+        startActivity(filterIntent)
     }
 }
