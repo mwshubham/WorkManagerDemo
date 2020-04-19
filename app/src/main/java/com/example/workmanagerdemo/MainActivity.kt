@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-@file:JvmName("Constants")
-
 package com.example.workmanagerdemo
 
-// Notification Channel constants
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.workmanagerdemo.databinding.ActivityMainBinding
 
-// Name of Notification Channel for verbose notifications of background work
-@JvmField
-val VERBOSE_NOTIFICATION_CHANNEL_NAME: CharSequence =
-    "Verbose WorkManager Notifications"
-const val VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION =
-    "Shows notifications whenever work starts"
+class MainActivity : AppCompatActivity() {
 
-@JvmField
-val NOTIFICATION_TITLE: CharSequence = "Work Manager Demo"
-const val CHANNEL_ID = "VERBOSE_NOTIFICATION"
-const val NOTIFICATION_ID = 1
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnStartWork.setOnClickListener { makeStatusNotification(this, "Starting Demo...") }
+    }
+}
