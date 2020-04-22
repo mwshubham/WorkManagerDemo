@@ -86,29 +86,37 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner"
             tools:ignore="HardcodedText"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_logs"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             android:gravity="center_vertical"
+            android:maxHeight="200dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#FF0000"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress_bar"
+            tools:visibility="visible" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_main"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:maxHeight="200dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_start_work"
+            tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

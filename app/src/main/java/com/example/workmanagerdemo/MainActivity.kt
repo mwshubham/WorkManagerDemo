@@ -74,38 +74,36 @@ class MainActivity : AppCompatActivity() {
                 .then(downloadImageWork)
                 .enqueue()
 
-            workManager.getWorkInfosForUniqueWorkLiveData(KEY_UNIQUE_WORK_NAME).observe(this, workInfosObserver())
+            workManager.getWorkInfosForUniqueWorkLiveData(KEY_UNIQUE_WORK_NAME).observe(this, workInfosObserver)
             makeStatusNotification(this, "Image Path Generation Work Enqueued with 5sec delay")
             Toast.makeText(this, "Image Path Generation Work Enqueued with 5sec delay", Toast.LENGTH_SHORT).show()
         }
     }
 
     @Suppress("SpellCheckingInspection")
-    private fun workInfosObserver(): Observer<List<WorkInfo>> {
-        return Observer { listOfWorkInfo ->
-            if (listOfWorkInfo.isNullOrEmpty()) {
-                return@Observer
-            }
-            val workInfo0 = listOfWorkInfo[0]
-            val workInfo1 = listOfWorkInfo[1]
+    private val workInfosObserver: Observer<List<WorkInfo>> = Observer { listOfWorkInfo ->
+        if (listOfWorkInfo.isNullOrEmpty()) {
+            return@Observer
+        }
+        val workInfo0 = listOfWorkInfo[0]
+        val workInfo1 = listOfWorkInfo[1]
 
 
-            Log.i(TAG, "${workInfo0.tags} : ${workInfo0.state}")
-            Log.i(TAG, "${workInfo1.tags} : ${workInfo1.state}")
+        Log.i(TAG, "${workInfo0.tags} : ${workInfo0.state}")
+        Log.i(TAG, "${workInfo1.tags} : ${workInfo1.state}")
 
-            val logMessage = "${workInfo0.tags.first().toString().split(".").last()}: ${workInfo0.state} \n${workInfo1.tags.first().toString().split(".").last()}: ${workInfo1.state}"
-            binding.tvLogs.text = logMessage
+        val logMessage = "${workInfo0.tags.first().toString().split(".").last()}: ${workInfo0.state} \n${workInfo1.tags.first().toString().split(".").last()}: ${workInfo1.state}"
+        binding.tvLogs.text = logMessage
 
-            if (workInfo0.state.isFinished && workInfo1.state.isFinished) {
-                val outputImageUrl = workInfo1.outputData.getString(DownloadImageWorker.KEY_IMAGE_URL)
-                if (!outputImageUrl.isNullOrEmpty()) {
-                    binding.btnStartWork.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
-                    binding.ivMain.visibility = View.VISIBLE
-                    binding.tvLogs.visibility = View.GONE
+        if (workInfo0.state.isFinished && workInfo1.state.isFinished) {
+            val outputImageUrl = workInfo1.outputData.getString(DownloadImageWorker.KEY_IMAGE_URL)
+            if (!outputImageUrl.isNullOrEmpty()) {
+                binding.btnStartWork.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+                binding.ivMain.visibility = View.VISIBLE
+                binding.tvLogs.visibility = View.GONE
 
-                    Glide.with(this).load(outputImageUrl).into(binding.ivMain)
-                }
+                Glide.with(this).load(outputImageUrl).into(binding.ivMain)
             }
         }
     }
